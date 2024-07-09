@@ -1,0 +1,12 @@
+{
+    "display_name": "Discord Chatter",
+    "loading_order": 1,
+    "requires": [],
+    "optional": [],
+    "js": "index.js",
+    "css": "style.css",
+    "author": "Your Name",
+    "version": "0.0.1",
+    "homePage": "https://github.com/Akrossnclaire/discord-chatter",
+    "auto_update": true
+}
