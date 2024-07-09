@@ -1,16 +1,13 @@
-import { getContext, loadExtensionSettings, extension_settings } from "../../extensions.js";
-import { eventSource, event_types } from "../../../script.js";
-import { saveSettingsDebounced } from "../../../utils.js";
-
-// Your Discord.js setup
-const { Client, GatewayIntentBits } = require('discord.js');
-
-let discordClient;
-let discordChannel;
+import { getContext, loadExtensionSettings, extension_settings } from '../../../public/scripts/extensions.js';
+import { eventSource, event_types } from '../../../public/scripts/script.js';
+import { saveSettingsDebounced } from '../../../public/scripts/utils.js';
 
 // Extension settings
 extension_settings.discordChatter = extension_settings.discordChatter || {};
 const settings = extension_settings.discordChatter;
+
+let discordClient = null;
+let discordChannel = null;
 
 function log(message) {
     console.log(`[Discord Chatter] ${message}`);
@@ -18,6 +15,10 @@ function log(message) {
 
 async function setupDiscordBot() {
     log('Setting up Discord bot...');
+    
+    // We'll use a dynamic import for discord.js to avoid issues with CommonJS vs ES modules
+    const { Client, GatewayIntentBits } = await import('discord.js');
+    
     discordClient = new Client({
         intents: [
             GatewayIntentBits.Guilds,
@@ -101,4 +102,6 @@ jQuery(async () => {
             }
         });
     }
+
+    log("Discord Chatter extension loaded");
 });
